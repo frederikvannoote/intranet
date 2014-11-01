@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Messages</title>
+	<link rel="stylesheet"href="/lib/jquery-ui-1.11.2/jquery-ui.css">
+	<script src="/lib/jquery-ui-1.11.2/external/jquery/jquery.js"></script>
+	<script src="/lib/jquery-ui-1.11.2/jquery-ui.js"></script>
+</head>
+
+<body>
+	<script>
+	  $(function() {
+	  	$( "#accordion" ).accordion();
+	  });
+	  
+	  $.getJSON( "/messages", function( data ) {
+		var active = $('#accordion').accordion('option', 'active');
+	      	$.each( data, function( index, element ) {
+	        	$('#accordion').append('<h3><a href="#">' +
+	        	element.title +
+	        	'</a></h3><div><p>' + element.content + '</p></div>')
+	        	                    .accordion('destroy').accordion({
+	        	                    active: active});
+	        });	             
+	  });
+        </script>
+        
+        <div id="accordion" class="messages">
+        </div>
+</body>
+</html>
